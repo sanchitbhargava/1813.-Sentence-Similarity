@@ -12,41 +12,38 @@ s1 = "Frog cool" and s2 = "Frogs are cool" are not similar, since although there
 Given two sentences sentence1 and sentence2, return true if sentence1 and sentence2 are similar. Otherwise, return false.
 
  
+class Solution {
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+        //s1 = "hello Jane"
+        //s2 = "Hello my name is Jane"
+        String[] arr1 = sentence1.split(" "); //m
+        String[] arr2 = sentence2.split(" "); //n
 
-Example 1:
+        int start = 0,
+        end1 = arr1.length - 1,
+        end2 = arr2.length - 1;
 
-Input: sentence1 = "My name is Haley", sentence2 = "My Haley"
+        if (arr1.length > arr2.length){
+            return areSentencesSimilar(sentence2, sentence1);
+        }
 
-Output: true
+        //s1 = "Hello Jane"
+        //s2 = "Hello my name is Jane"
+        //arr1 = Hello,Jane
+        //arr2 = Hello, my, name ,is, Jane
+        while (start < arr1.length && arr1[start].equals(arr2[start])) {
+            start = start + 1;
+        }
 
-Explanation:
+        while (end1 >= 0 && arr1[end1].equals(arr2[end2])) {
+            end1 = end1 - 1;
+            end2 = end2 - 1;
+        }
 
-sentence2 can be turned to sentence1 by inserting "name is" between "My" and "Haley".
+        return start > end1;
 
-Example 2:
+        //T: 0(m + n)
+        //S: 0(m + n)
 
-Input: sentence1 = "of", sentence2 = "A lot of words"
-
-Output: false
-
-Explanation:
-
-No single sentence can be inserted inside one of the sentences to make it equal to the other.
-
-Example 3:
-
-Input: sentence1 = "Eating right now", sentence2 = "Eating"
-
-Output: true
-
-Explanation:
-
-sentence2 can be turned to sentence1 by inserting "right now" at the end of the sentence.
-
- 
-
-Constraints:
-
-1 <= sentence1.length, sentence2.length <= 100
-sentence1 and sentence2 consist of lowercase and uppercase English letters and spaces.
-The words in sentence1 and sentence2 are separated by a single space.
+    }
+}
